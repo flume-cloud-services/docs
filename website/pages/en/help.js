@@ -22,12 +22,12 @@ function Help(props) {
   const supportLinks = [
     {
       content: `Learn more using the [documentation on this site.](${docUrl(
-        'doc1.html',
+        'getting-started.html',
       )})`,
       title: 'Browse Docs',
     },
     {
-      content: 'Ask questions about the documentation and project',
+      content: 'Ask questions about the documentation and project on [Github](https://github.com/flume-cloud-services)',
       title: 'Join the community',
     },
     {
@@ -43,7 +43,7 @@ function Help(props) {
           <header className="postHeader">
             <h1>Need help?</h1>
           </header>
-          <p>This project is maintained by a dedicated group of people.</p>
+          <p>This project is maintained by <a href="https://github.com/flume-cloud-services">Flume Cloud Services Organization.</a></p>
           <GridBlock contents={supportLinks} layout="threeColumn" />
         </div>
       </Container>
