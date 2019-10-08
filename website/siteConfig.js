@@ -15,8 +15,8 @@ const users = [
 const siteConfig = {
   title: 'Flume Cloud Services', // Title for your website.
   tagline: 'Flume Cloud Services documentation website',
-  url: 'https://github.com/flume-cloud-services/', // Your website URL
-  baseUrl: '/', // Base URL for your project */
+  url: 'https://flume-cloud-services.github.com', // Your website URL
+  baseUrl: '/docs', // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:
   //   url: 'https://facebook.github.io',
   //   baseUrl: '/test-site/',
