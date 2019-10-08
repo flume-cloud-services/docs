@@ -1,0 +1,97 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>File Storage · Flume Cloud Services</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="`Golang File Storage` server via **HTTP** (by Flume Cloud Services)"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="File Storage · Flume Cloud Services"/><meta property="og:type" content="website"/><meta property="og:url" content="https://flume-cloud-services.github.com/docsindex"/><meta property="og:description" content="`Golang File Storage` server via **HTTP** (by Flume Cloud Services)"/><meta property="og:image" content="https://flume-cloud-services.github.com/docs/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://flume-cloud-services.github.com/docs/img/undraw_tweetstorm.svg"/><link rel="shortcut icon" href="/docsimg/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/docsjs/scrollSpy.js"></script><link rel="stylesheet" href="/docscss/main.css"/><script src="/docsjs/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/docs"><img class="logo" src="/docsimg/favicon.ico" alt="Flume Cloud Services"/><h2 class="headerTitleWithLogo">Flume Cloud Services</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docsdocs/getting-started" target="_self">Docs</a></li><li class=""><a href="/docshelp" target="_self">Help</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Services</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Getting Started</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docsdocs/getting-started">Getting Started</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Services</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docsdocs/database">Database</a></li><li class="navListItem"><a class="navItem" href="/docsdocs/cache">Cache</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docsdocs/file-storage">File Storage</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">File Storage</h1></header><article><div><span><p><code>Golang File Storage</code> server via <strong>HTTP</strong> (by Flume Cloud Services)</p>
+<h2><a class="anchor" aria-hidden="true" id="usage"></a><a href="#usage" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Usage</h2>
+<p>Use the <code>signin</code> route with the following body to generate the JWT token :</p>
+<pre><code class="hljs">POST /signin
+
+<span class="hljs-keyword">Body</span>:
+    - name: The admin name given <span class="hljs-keyword">in</span> FLUME_FILE_STORAGE_ADMIN by default it<span class="hljs-symbol">'s</span> simply <span class="hljs-string">"admin"</span>
+
+<span class="hljs-keyword">Return</span>:
+    - <span class="hljs-keyword">If</span> success :
+        - <span class="hljs-type">A</span> JWT Token
+        - The cookie <span class="hljs-keyword">with</span> the previously generated JWT Token
+    - <span class="hljs-keyword">If</span> failed :
+        - <span class="hljs-type">Unauthorized</span> Status
+        - Bad request Status
+</code></pre>
+<p>Check if the jwt is correctly generated by visiting <code>welcome</code> route :</p>
+<pre><code class="hljs">GET /welcome
+
+<span class="hljs-keyword">Return</span>:
+    - <span class="hljs-keyword">If</span> success :
+        - <span class="hljs-type">Welcome</span> to you visitor !
+    - <span class="hljs-keyword">If</span> failed :
+        - <span class="hljs-type">Unauthorized</span> Status
+</code></pre>
+<p>Then upload a file using the <code>post</code> route with multipart encoded data :</p>
+<pre><code class="hljs">POST /post
+
+Body:
+    - file: The file <span class="hljs-keyword">to</span> upload
+    - need_auth: <span class="hljs-builtin-name">set</span> <span class="hljs-keyword">to</span> <span class="hljs-string">"yes"</span> <span class="hljs-keyword">if</span> the<span class="hljs-built_in"> user </span>has <span class="hljs-keyword">to</span> bee authenticated <span class="hljs-keyword">to</span> access the file, otherwise sset <span class="hljs-keyword">to</span> <span class="hljs-string">"no"</span>
+
+Return:
+  - <span class="hljs-keyword">If</span> success:
+      - The file name which you can use <span class="hljs-keyword">to</span> access the file
+  - <span class="hljs-keyword">If</span> failed:
+      - Internal<span class="hljs-built_in"> Server </span><span class="hljs-builtin-name">Error</span> Status
+</code></pre>
+<p>If you want to access a private file (need authentication) use <code>/private/&lt;filename&gt;</code> (ensure that you are signed in).</p>
+<p>Otherwise if you want to access a public file (doesn't need authentication) use <code>public/&lt;filename&gt;</code>.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docsdocs/cache"><span class="arrow-prev">← </span><span>Cache</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#usage">Usage</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/docs" class="nav-home"><img src="/docsimg/favicon.ico" alt="Flume Cloud Services" width="66" height="58"/></a><div></div><div><h5>Community</h5><a href="https://github.com/flume-cloud-services">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a><div class="social"><a href="https://twitter.com/ErwanRxsl" class="twitter-follow-button">Follow @ErwanRxsl</a></div></div></section><section class="copyright">Copyright © 2019 Flume Cloud Services organization</section></footer></div><script>window.twttr=(function(d,s, id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return t;js=d.createElement(s);js.id=id;js.src='https://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js, fjs);t._e = [];t.ready = function(f) {t._e.push(f);};return t;}(document, 'script', 'twitter-wjs'));</script></body></html>
